@@ -20,7 +20,7 @@ BookshelfAdapter.prototype.save = function(doc, Model, cb) {
       that.interceptors['save'][x].call(that,model)
     }
     cb(null,model)
-  });
+  }).catch(function(err){cb(err)});
 };
 BookshelfAdapter.prototype.destroy = function(doc, Model, cb) {
   if (!doc.id) return process.nextTick(cb);
@@ -30,7 +30,7 @@ BookshelfAdapter.prototype.destroy = function(doc, Model, cb) {
       that.interceptors['destroy'][x].call(that,model)
     }
     cb(null,model)
-  });
+  }).catch(function(err){cb(err)});
 };
 BookshelfAdapter.prototype.addInterceptor = function(type,callback){
   this.interceptors[type].push(callback);
